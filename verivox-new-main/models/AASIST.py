@@ -545,7 +545,7 @@ class AttentiveStatsPool(nn.Module):
         alpha = self.activation(alpha)
         alpha = self.linear2(alpha)
         alpha = self.softmax(alpha)
-
+        self.attention_weights = alpha.detach()
         mean = torch.sum(alpha * x, dim=2)
         residuals = x - mean.unsqueeze(2)
         # Weighted variance
